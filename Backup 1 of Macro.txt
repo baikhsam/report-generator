@@ -1,0 +1,233 @@
+Sub GenerateReport()
+'HongSeok, Sam, Baik
+'7/13/2018
+'Macro created to generate B&L report from given data excel file
+
+'Checking if everything was properly set up
+output = MsgBox("Did you name the Excel Worksheet you are trying to generate a report with, DATA?", vbYesNoCancel, "Report Generator")
+If output = vbNo Then
+    MsgBox ("In order to successfully generate a report please ensure the Excel Worksheet that you are summarizing is named DATA. Thank you.")
+    Exit Sub
+ElseIf output = vbCancel Then
+    Exit Sub
+ElseIf output = vbYes Then
+    MsgBox ("Generating Report")
+End If
+
+
+
+Dim ws As Worksheet
+Set ws = Sheets.Add
+ws.Name = "Report" & ws.Name
+
+'Creating Skeleton of Report
+
+With ws.Columns("B")
+.ColumnWidth = .ColumnWidth * 3
+End With
+With ws.Columns("M")
+.ColumnWidth = .ColumnWidth * 2
+End With
+With ws.Columns("F")
+.ColumnWidth = .ColumnWidth * 1.5
+End With
+With ws.Columns("H")
+.ColumnWidth = .ColumnWidth * 0.2
+End With
+ws.Range("A1:P1").EntireColumn.AutoFit
+ws.Cells.Font.Name = "Arial"
+ws.Cells.Font.Size = 7
+ws.Cells.VerticalAlignment = xlBottom
+
+ws.Range("A1") = "GLOBAL ENERGY TRADING PTE LTD BORROW/LOAN FOR CONSORT BUNKERS"
+ws.Range("A1").Font.Size = 10
+ws.Range("A1").Font.Bold = True
+ws.Range("A1").Font.Name = "Garamond"
+ws.Range("A3") = " FOR THE MONTH OF :"
+'ws.Range("A3").WrapText = True
+ws.Range("A3").Font.Bold = True
+ws.Range("C3") = "MONTH"
+ws.Range("D3") = "YEAR"
+ws.Range("C3").Font.Bold = True
+ws.Range("D3").Font.Bold = True
+ws.Range("G3") = "PAGE    1/2"
+ws.Range("N3") = "PAGE    2/2"
+ws.Range("G3").Font.Italic = True
+ws.Range("N3").Font.Italic = True
+
+ws.Range("A5") = "LOADING"
+ws.Range("A7") = "BEFORE"
+ws.Range("A100") = "TOTAL"
+ws.Range("A6") = "DATE"
+ws.Range("B6") = "VESSEL/BARGE"
+ws.Range("C6") = "LOCN"
+ws.Range("D6") = "380CST"
+ws.Range("E6") = "500CST"
+ws.Range("F6") = "BARGE/TMNL"
+ws.Range("G6") = "REMARKS"
+ws.Range("D100") = "=SUM(D7:D99)"
+ws.Range("E100") = "=SUM(E7:E99)"
+ws.Range("D106") = "=D100"
+ws.Range("E106") = "=E100"
+ws.Range("D108") = "=D106-D107"
+
+ws.Range("I5") = "DELIVERY"
+ws.Range("I7") = "BEFORE"
+ws.Range("I100") = "TOTAL"
+ws.Range("I6") = "DATE"
+ws.Range("J6") = "VESSEL"
+ws.Range("K6") = "380CST"
+ws.Range("L6") = "500CST"
+ws.Range("M6") = "BARGE/TMNL"
+ws.Range("N6") = "REMARKS"
+ws.Range("D107") = "=K100"
+ws.Range("E107") = "=L100"
+ws.Range("A102") = "CONSORT BUNKERS B&L MONTHLY REPORT FOR MTH OF :"
+ws.Range("A106") = "TOTAL LOADED QUANTITY BY CONSORT"
+ws.Range("A107") = "TOTAL DELIVERED QUANTITY BY CONSORT"
+ws.Range("A108") = "B & L"
+ws.Range("A110") = "THANK YOU FOR YOUR VALUED SUPPORT AND COORPERATION"
+ws.Range("A112") = "YOURS FAITHFULLY"
+ws.Range("A113") = "GLOBAL ENERGY TRADING PTE LTD"
+ws.Range("A114") = "NAME"
+ws.Range("D102") = "=C3"
+ws.Range("D105") = "380CST"
+ws.Range("E105") = "500CST"
+ws.Range("K100") = "=SUM(K7:K99)"
+ws.Range("L100") = "=SUM(L7:L99)"
+ws.Range("D107") = "=K100"
+ws.Range("E107") = "=L100"
+ws.Range("E108") = "=E106-E107"
+
+ws.Range("A100").Font.Bold = True
+ws.Range("D100").Font.Bold = True
+ws.Range("E100").Font.Bold = True
+ws.Range("A106").Font.Bold = True
+ws.Range("A107").Font.Bold = True
+ws.Range("A108").Font.Bold = True
+
+ws.Range("A5").HorizontalAlignment = xlLeft
+ws.Range("A5").Font.Bold = True
+ws.Range("A7").HorizontalAlignment = xlCenter
+ws.Range("A7").Font.Bold = True
+ws.Range("A100").HorizontalAlignment = xlCenter
+ws.Range("A100").Font.Bold = True
+ws.Range("A6").HorizontalAlignment = xlCenter
+ws.Range("A6").Font.Bold = True
+ws.Range("B6").HorizontalAlignment = xlCenter
+ws.Range("B6").Font.Bold = True
+ws.Range("C6").HorizontalAlignment = xlCenter
+ws.Range("C6").Font.Bold = True
+ws.Range("D6").HorizontalAlignment = xlRight
+ws.Range("D6").Font.Bold = True
+ws.Range("E6").HorizontalAlignment = xlRight
+ws.Range("E6").Font.Bold = True
+ws.Range("F6").HorizontalAlignment = xlCenter
+ws.Range("F6").Font.Bold = True
+ws.Range("G6").HorizontalAlignment = xlCenter
+ws.Range("G6").Font.Bold = True
+
+ws.Range("I5").HorizontalAlignment = xlLeft
+ws.Range("I5").Font.Bold = True
+ws.Range("I7").HorizontalAlignment = xlCenter
+ws.Range("I7").Font.Bold = True
+ws.Range("I100").HorizontalAlignment = xlCenter
+ws.Range("I100").Font.Bold = True
+ws.Range("I6").HorizontalAlignment = xlCenter
+ws.Range("I6").Font.Bold = True
+ws.Range("J6").HorizontalAlignment = xlCenter
+ws.Range("J6").Font.Bold = True
+ws.Range("K6").HorizontalAlignment = xlCenter
+ws.Range("K6").Font.Bold = True
+ws.Range("L6").HorizontalAlignment = xlRight
+ws.Range("L6").Font.Bold = True
+ws.Range("M6").HorizontalAlignment = xlCenter
+ws.Range("M6").Font.Bold = True
+ws.Range("N6").HorizontalAlignment = xlCenter
+ws.Range("N6").Font.Bold = True
+ws.Range("O6").HorizontalAlignment = xlCenter
+ws.Range("O6").Font.Bold = True
+
+'Creating table outline for Loading
+ws.Range("A5:G100").Borders.LineStyle = xlContinuous
+ws.Range("D105:E105").Borders.LineStyle = xlContinuous
+'ws.Range("A5:G32").WrapText = True
+ws.Range("A5:G5").Merge
+ws.Range("A7:C7").Merge
+ws.Range("A100:C100").Merge
+ws.Range("A103:C103").Merge
+
+'Creating table outline for Delivery
+ws.Range("I5:N100").Borders.LineStyle = xlContinuous
+'ws.Range("I5:O32").WrapText = True
+ws.Range("I5:N5").Merge
+ws.Range("I7:J7").Merge
+ws.Range("I100:J100").Merge
+
+
+'Sorting data by BDR/CQ Date
+Dim copysheet As Worksheet
+Set copysheet = ThisWorkbook.Worksheets("DATA")
+copysheet.Copy ThisWorkbook.Sheets(Sheets.Count)
+With ActiveSheet.Sort
+     .SortFields.Add Key:=Range("N1"), Order:=xlDescending
+     .SortFields.Add Key:=Range("I1"), Order:=xlAscending
+     .SetRange Range("A1:AN430")
+     .Header = xlYes
+     .Apply
+End With
+
+Dim row As Integer
+row = 2
+Dim holder As Double
+holder = 0
+' Select cell A2, *first line of data*.
+ActiveSheet.Range("A2").Select
+' Set Do loop to stop when an empty cell is reached.
+Do Until IsEmpty(ActiveCell)
+    copysheet.Activate
+    If copysheet.Range("H" & row) = "OPENING STOCK" And copysheet.Range("J" & row) = "FF" Then
+        copysheet.Activate
+        holder = Range("O" & row)
+        ws.Activate
+        Range("D7") = holder
+    ElseIf copysheet.Range("H" & row) = "OPENING STOCK" And copysheet.Range("J" & row) = "FFF" Then
+        MsgBox ("CHECK")
+        copysheet.Activate
+        holder = Range("O" & row)
+        ws.Activate
+        Range("E7") = holder
+    Else
+        copysheet.Activate
+        holder = Range("O" & row)
+        ws.Activate
+        Range("D" & row) = holder
+    End If
+    ws.Activate
+    ActiveSheet.Range("A136") = "Test"
+    
+    ' Step down 1 row from present location.
+    ActiveCell.Offset(1, 0).Select
+Loop
+
+
+
+
+
+
+
+
+
+
+
+
+
+'Copying Worksheet into a new Excel Workbook file
+'ws.Copy
+
+'Hide blank rows
+ws.Range("A31:A99").AutoFilter 1, "<>", , , False
+End Sub
+
+
+
