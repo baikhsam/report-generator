@@ -30,6 +30,8 @@ ask_month = WorksheetFunction.Proper(ask_month)
 outsider1 = InputBox("Please enter the abbreviated code name of the B & L outsider you wish the report be made for: ", "Enter code name", "TS")
 outsider2 = InputBox("SECOND OUTSIDER OPTIONAL: If making two reports, please enter another abbreviated code name of the B & L outsider if you wish the report be made for: ", "OPTIONAL: Enter code name")
 
+outsider1 = UCase(outsider1)
+outsider2 = UCase(outsider2)
 
 Worksheets("DATA").Activate
 Range("A2:AN4000").Sort _
@@ -1145,9 +1147,9 @@ End If
 
 
 'Copying Worksheet into a new Excel Workbook file
-'ws.Copy
+ws.Copy
 Erase row_list
-'If outsider2 <> "" Then ws2.Copy
+If outsider2 <> "" Then ws2.Copy
 
 Application.ScreenUpdating = True
 End Sub
