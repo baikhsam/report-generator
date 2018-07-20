@@ -39,7 +39,7 @@ ws.Name = "Report " & ws.Name
 ws.Activate
 
 Worksheets("DATA").Activate
-Range("A2:AN4000").Sort _
+Range("A2:AN99000").Sort _
 Key1:=Range("I1"), Order1:=xlAscending
 
 'Creating Skeleton of Report
@@ -475,7 +475,7 @@ Dim row_list_track As Integer
 row_list_track = 0
 
 If outsider1 <> "" Then
-    Do While copysheet.Cells(i, 1).Value <> ""
+    Do While copysheet.Cells(i, 6).Value <> ""
         month_track2 = month(copysheet.Range("I" & row))
         If copysheet.Range("M" & row) <> outsider1 Or month_track <> month_track2 Then
             row = row + 1
@@ -592,7 +592,7 @@ If outsider1 <> "" Then
     ws.Range("F6") = "F"
     ws.Range("G6") = "G"
     ws.Range("H6") = "LG"
-    Do While copysheet.Cells(i, 1).Value <> ""
+    Do While copysheet.Cells(i, 6).Value <> ""
         month_track2 = month(copysheet.Range("I" & row))
         row_holder = row_list(row_list_track)
         If copysheet.Range("M" & row) <> outsider1 Or month_track <> month_track2 Then
@@ -732,7 +732,7 @@ Erase row_list
 
 If outsider2 <> "" Then
     ws2.Activate
-    Do While copysheet.Cells(i, 1).Value <> ""
+    Do While copysheet.Cells(i, 6).Value <> ""
         month_track2 = month(copysheet.Range("I" & row))
         If copysheet.Range("M" & row) <> outsider2 Or month_track <> month_track2 Then
             row = row + 1
@@ -847,7 +847,7 @@ If outsider2 <> "" Then
     ws2.Range("F6") = "F"
     ws2.Range("G6") = "G"
     ws2.Range("H6") = "LG"
-    Do While copysheet.Cells(i, 1).Value <> ""
+    Do While copysheet.Cells(i, 6).Value <> ""
         month_track2 = month(copysheet.Range("I" & row))
         row_holder = row_list(row_list_track)
         If copysheet.Range("M" & row) <> outsider2 Or month_track <> month_track2 Then
@@ -1104,6 +1104,12 @@ End If
 ws.Copy
 Erase row_list
 If outsider2 <> "" Then ws2.Copy
+
+Application.DisplayAlerts = False
+If outsider1 <> "" Then ws.Delete
+If outsider2 <> "" Then ws2.Delete
+copysheet.Delete
+Application.DisplayAlerts = True
 
 Application.ScreenUpdating = True
 End Sub
