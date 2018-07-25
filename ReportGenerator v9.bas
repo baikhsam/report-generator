@@ -20,12 +20,12 @@ Dim ask_name As String
 Dim outsider1 As String
 Dim outsider2 As String
 
-ask_month = InputBox("Enter the month this report is for: ", "Enter month", "Feb")
-ask_name = InputBox("Enter the name you wish to create the report under", "Enter name", "ENTER")
+ask_month = InputBox("Enter the month this report is for: ", "Enter month", "Jan")
+ask_name = InputBox("Enter the name you wish to create the report under", "Enter name")
 ask_name = WorksheetFunction.Proper(ask_name)
 
 ask_month = WorksheetFunction.Proper(ask_month)
-outsider1 = InputBox("Please enter the abbreviated code name of the B & L outsider you wish the report be made for: ", "Enter code name", "TS")
+outsider1 = InputBox("Please enter the abbreviated code name of the B & L outsider you wish the report be made for: ", "Enter code name", "CS")
 outsider2 = InputBox("SECOND OUTSIDER OPTIONAL: If making two reports, please enter another abbreviated code name of the B & L outsider if you wish the report be made for: ", "OPTIONAL: Enter code name")
 
 outsider1 = UCase(outsider1)
@@ -36,7 +36,6 @@ Set data = Worksheets("DATA")
 Dim ws As Worksheet
 Set ws = Sheets.Add
 ws.Name = "Report " & ws.Name
-
 
 data.Activate
 Range("A2:AN9000").Sort _
@@ -187,8 +186,7 @@ With ws.Range("E108").Borders(xlEdgeBottom)
 .LineStyle = xlDouble
 .Weight = xlThick
 End With
-
-    
+  
 ws.Range("A5").HorizontalAlignment = xlLeft
 ws.Range("A5").Font.Bold = True
 ws.Range("A7").HorizontalAlignment = xlCenter
@@ -450,7 +448,6 @@ month_track = month(ask_month & " 1")
 'month_track2 keeps track of the month integer value of the current copysheet row
 Dim month_track2 As Integer
 month_track2 = 0
-
 'Adding columns for more fuel grade options in first report sheet
 ws.Range("M:O").EntireColumn.Insert
 ws.Range("M6") = "F"
@@ -563,8 +560,6 @@ If outsider1 <> "" Then
     Loop
 End If
 
-
-
 'RESETING VARIABLES FOR NEXT LOOP
 'row keeps track of copysheet row
 row = 2
@@ -669,23 +664,23 @@ If outsider1 <> "" Then
         i = i + 1
     Loop
     'Implementing correct format
-    With Range("D108").Borders(xlEdgeTop)
+    With ws.Range("D108").Borders(xlEdgeTop)
         .LineStyle = xlContinuous
         .Weight = xlThin
     End With
-    With Range("E108").Borders(xlEdgeTop)
+    With ws.Range("E108").Borders(xlEdgeTop)
         .LineStyle = xlContinuous
         .Weight = xlThin
     End With
-    With Range("F108").Borders(xlEdgeTop)
+    With ws.Range("F108").Borders(xlEdgeTop)
         .LineStyle = xlContinuous
         .Weight = xlThin
     End With
-    With Range("G108").Borders(xlEdgeTop)
+    With ws.Range("G108").Borders(xlEdgeTop)
         .LineStyle = xlContinuous
         .Weight = xlThin
     End With
-    With Range("H108").Borders(xlEdgeTop)
+    With ws.Range("H108").Borders(xlEdgeTop)
         .LineStyle = xlContinuous
         .Weight = xlThin
     End With
@@ -708,7 +703,6 @@ If outsider1 <> "" Then
     ws.Range("F108") = "=F106-F107"
     ws.Range("G108") = "=G106-G107"
     ws.Range("H108") = "=H106-H107"
-    
 End If
 
 'RESETING VARIABLES FOR NEXT LOOP
@@ -817,8 +811,6 @@ If outsider2 <> "" Then
     Loop
 End If
 
-
-
 'RESETING VARIABLES FOR NEXT LOOP
 'row keeps track of copysheet row
 row = 2
@@ -923,43 +915,43 @@ If outsider2 <> "" Then
         i = i + 1
     Loop
     'Implementing correct format
-    With Range("D108").Borders(xlEdgeTop)
+    With ws2.Range("D108").Borders(xlEdgeTop)
     .LineStyle = xlContinuous
     .Weight = xlThin
     End With
-    With Range("D108").Borders(xlEdgeBottom)
+    With ws2.Range("D108").Borders(xlEdgeBottom)
     .LineStyle = xlDouble
     .Weight = xlThick
     End With
-    With Range("E108").Borders(xlEdgeTop)
+    With ws2.Range("E108").Borders(xlEdgeTop)
     .LineStyle = xlContinuous
     .Weight = xlThin
     End With
-    With Range("E108").Borders(xlEdgeBottom)
+    With ws2.Range("E108").Borders(xlEdgeBottom)
     .LineStyle = xlDouble
     .Weight = xlThick
     End With
-    With Range("F108").Borders(xlEdgeBottom)
+    With ws2.Range("F108").Borders(xlEdgeBottom)
     .LineStyle = xlDouble
     .Weight = xlThick
     End With
-    With Range("G108").Borders(xlEdgeBottom)
+    With ws2.Range("G108").Borders(xlEdgeBottom)
     .LineStyle = xlDouble
     .Weight = xlThick
     End With
-    With Range("H108").Borders(xlEdgeBottom)
+    With ws2.Range("H108").Borders(xlEdgeBottom)
     .LineStyle = xlDouble
     .Weight = xlThick
     End With
-    With Range("F108").Borders(xlEdgeTop)
+    With ws2.Range("F108").Borders(xlEdgeTop)
         .LineStyle = xlContinuous
         .Weight = xlThin
     End With
-    With Range("G108").Borders(xlEdgeTop)
+    With ws2.Range("G108").Borders(xlEdgeTop)
         .LineStyle = xlContinuous
         .Weight = xlThin
     End With
-    With Range("H108").Borders(xlEdgeTop)
+    With ws2.Range("H108").Borders(xlEdgeTop)
         .LineStyle = xlContinuous
         .Weight = xlThin
     End With
@@ -983,17 +975,15 @@ If outsider2 <> "" Then
     ws2.Range("G108") = "=G106-G107"
     ws2.Range("H108") = "=H106-H107"
     
-   
-    
-    With Range("F108").Borders(xlEdgeTop)
+    With ws2.Range("F108").Borders(xlEdgeTop)
     .LineStyle = xlContinuous
     .Weight = xlThin
     End With
-    With Range("G108").Borders(xlEdgeTop)
+    With ws2.Range("G108").Borders(xlEdgeTop)
     .LineStyle = xlContinuous
     .Weight = xlThin
     End With
-    With Range("H108").Borders(xlEdgeTop)
+    With ws2.Range("H108").Borders(xlEdgeTop)
     .LineStyle = xlContinuous
     .Weight = xlThin
     End With
@@ -1001,7 +991,6 @@ End If
 
 'Hiding any blank Columns or Rows
 If outsider2 <> "" Then
-        
     If ws2.Range("H108") < 0 Then ws2.Range("H108").Font.Color = vbRed
     If ws2.Range("F108") < 0 Then ws2.Range("H108").Font.Color = vbRed
     If ws2.Range("G108") < 0 Then ws2.Range("H108").Font.Color = vbRed
@@ -1032,6 +1021,7 @@ If outsider2 <> "" Then
         TextOperator:=xlContains
     Selection.FormatConditions(Selection.FormatConditions.Count).SetFirstPriority
     Selection.FormatConditions(1).StopIfTrue = True
+    ws2.Range("A2").Select
 End If
 
 'Hiding any blank Columns or Rows
@@ -1057,7 +1047,6 @@ If outsider1 <> "" Then
         .LineStyle = xlDouble
         .Weight = xlThick
     End With
-    
     
     If ws.Range("H108") < 0 Then ws.Range("H108").Font.Color = vbRed
     If ws.Range("F108") < 0 Then ws.Range("H108").Font.Color = vbRed
@@ -1088,6 +1077,7 @@ If outsider1 <> "" Then
         TextOperator:=xlContains
     Selection.FormatConditions(Selection.FormatConditions.Count).SetFirstPriority
     Selection.FormatConditions(1).StopIfTrue = True
+    ws.Range("A2").Select
 End If
 
 'Copying Worksheet into a new Excel Workbook file
@@ -1095,13 +1085,10 @@ ws.Copy
 
 Erase row_list
 If outsider2 <> "" Then ws2.Copy
-
 Application.DisplayAlerts = False
 If outsider1 <> "" Then ws.Delete
 If outsider2 <> "" Then ws2.Delete
-
 Application.DisplayAlerts = True
-
 Application.ScreenUpdating = True
 End Sub
 
