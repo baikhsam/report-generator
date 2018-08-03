@@ -135,7 +135,7 @@ ws.Range("M6") = "BARGE/TMNL"
 ws.Range("N6") = "REMARKS"
 ws.Range("D107") = "=K100"
 ws.Range("E107") = "=L100"
-ws.Range("A102") = "CONSORT BUNKERS B&L MONTHLY REPORT FOR MTH OF :"
+ws.Range("A102") = outsider1 & " BUNKERS B&L MONTHLY REPORT FOR MTH OF :"
 ws.Range("A106") = "TOTAL LOADED QUANTITY BY " & outsider1
 ws.Range("A107") = "TOTAL DELIVERED QUANTITY BY " & outsider1
 ws.Range("A108") = "B & L"
@@ -356,7 +356,7 @@ If outsider2 <> "" Then
     ws2.Range("N6") = "REMARKS"
     ws2.Range("D107") = "=K100"
     ws2.Range("E107") = "=L100"
-    ws2.Range("A102") = "CONSORT BUNKERS B&L MONTHLY REPORT FOR MTH OF :"
+    ws2.Range("A102") = outsider2 & " BUNKERS B&L MONTHLY REPORT FOR MTH OF :"
     ws2.Range("A106") = "TOTAL LOADED QUANTITY BY " & outsider2
     ws2.Range("A107") = "TOTAL DELIVERED QUANTITY BY " & outsider2
     ws2.Range("A108") = "B & L"
