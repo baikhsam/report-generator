@@ -1,4 +1,4 @@
-Attribute VB_Name = "ReportGenerator"
+Attribute VB_Name = "BnL"
 Sub GenerateReport()
 'HongSeok (Sam) Baik for Global Energy Trading Ltd
 '7/16/2018
@@ -20,12 +20,12 @@ Dim ask_name As String
 Dim outsider1 As String
 Dim outsider2 As String
 
-ask_month = InputBox("Enter the month this report is for: ", "Enter month", "Jan")
-ask_name = InputBox("Enter the name you wish to create the report under", "Enter name")
+ask_month = InputBox("Enter the month this report is for: ", "Enter month", "Feb")
+ask_name = InputBox("Enter the name you wish to create the report under", "Enter name", "ENTER")
 ask_name = WorksheetFunction.Proper(ask_name)
 
 ask_month = WorksheetFunction.Proper(ask_month)
-outsider1 = InputBox("Please enter the abbreviated code name of the B & L outsider you wish the report be made for: ", "Enter code name", "CS")
+outsider1 = InputBox("Please enter the abbreviated code name of the B & L outsider you wish the report be made for: ", "Enter code name", "TS")
 outsider2 = InputBox("SECOND OUTSIDER OPTIONAL: If making two reports, please enter another abbreviated code name of the B & L outsider if you wish the report be made for: ", "OPTIONAL: Enter code name")
 
 outsider1 = UCase(outsider1)
@@ -36,6 +36,7 @@ Set data = Worksheets("DATA")
 Dim ws As Worksheet
 Set ws = Sheets.Add
 ws.Name = "Report " & ws.Name
+
 
 data.Activate
 Range("A2:AN9000").Sort _
@@ -54,8 +55,20 @@ End With
 With ws.Columns("J")
     .ColumnWidth = .ColumnWidth * 3
 End With
+With ws.Columns("D")
+.ColumnWidth = .ColumnWidth * 1.2
+End With
+With ws.Columns("E")
+.ColumnWidth = .ColumnWidth * 1.2
+End With
+With ws.Columns("F")
+.ColumnWidth = .ColumnWidth * 1.2
+End With
+With ws.Columns("G")
+.ColumnWidth = .ColumnWidth * 1.2
+End With
 With ws.Columns("H")
-.ColumnWidth = .ColumnWidth * 0.2
+.ColumnWidth = .ColumnWidth * 1.2
 End With
 ws.Range("A1:P1").EntireColumn.AutoFit
 ws.Cells.Font.Name = "Arial"
@@ -68,7 +81,7 @@ ws.Range("A1").Font.Bold = True
 ws.Range("A1").Font.Name = "Garamond"
 ws.Range("A3") = " FOR THE MONTH OF :"
 ws.Range("A3").Font.Bold = True
-ws.Range("C3") = ask_month
+ws.Range("C3") = UCase(Format(ask_month, "Long Date"))
 ws.Range("C3").Interior.ColorIndex = 6
 ws.Range("D102").Interior.ColorIndex = 6
 ws.Range("B108").Interior.ColorIndex = 6
@@ -123,8 +136,8 @@ ws.Range("N6") = "REMARKS"
 ws.Range("D107") = "=K100"
 ws.Range("E107") = "=L100"
 ws.Range("A102") = "CONSORT BUNKERS B&L MONTHLY REPORT FOR MTH OF :"
-ws.Range("A106") = "TOTAL LOADED QUANTITY BY CONSORT"
-ws.Range("A107") = "TOTAL DELIVERED QUANTITY BY CONSORT"
+ws.Range("A106") = "TOTAL LOADED QUANTITY BY " & outsider1
+ws.Range("A107") = "TOTAL DELIVERED QUANTITY BY " & outsider1
 ws.Range("A108") = "B & L"
 ws.Range("A110") = "THANK YOU FOR YOUR VALUED SUPPORT AND COORPERATION"
 ws.Range("A112") = "YOURS FAITHFULLY"
@@ -138,8 +151,8 @@ ws.Range("L100") = "=SUM(L7:L99)"
 ws.Range("D107") = "=K100"
 ws.Range("E107") = "=L100"
 ws.Range("E108") = "=E106-E107"
-ws.Range("B108") = "ENTER"
-ws.Range("C108") = "ENTER"
+ws.Range("B108") = Format(Date, "dd/mmm/yyyy")
+ws.Range("C108") = "2359 HRS"
 
 ws.Range("A100").Font.Bold = True
 ws.Range("D100").Font.Bold = True
@@ -186,7 +199,8 @@ With ws.Range("E108").Borders(xlEdgeBottom)
 .LineStyle = xlDouble
 .Weight = xlThick
 End With
-  
+
+    
 ws.Range("A5").HorizontalAlignment = xlLeft
 ws.Range("A5").Font.Bold = True
 ws.Range("A7").HorizontalAlignment = xlCenter
@@ -264,8 +278,20 @@ If outsider2 <> "" Then
     With ws2.Columns("J")
     .ColumnWidth = .ColumnWidth * 3
     End With
-    With ws2.Columns("H")
-    .ColumnWidth = .ColumnWidth * 0.2
+    With ws.Columns("D")
+    .ColumnWidth = .ColumnWidth * 1.2
+    End With
+    With ws.Columns("E")
+    .ColumnWidth = .ColumnWidth * 1.2
+    End With
+    With ws.Columns("F")
+    .ColumnWidth = .ColumnWidth * 1.2
+    End With
+    With ws.Columns("G")
+    .ColumnWidth = .ColumnWidth * 1.2
+    End With
+    With ws.Columns("H")
+    .ColumnWidth = .ColumnWidth * 1.2
     End With
     ws2.Range("A1:P1").EntireColumn.AutoFit
     ws2.Cells.Font.Name = "Arial"
@@ -278,7 +304,7 @@ If outsider2 <> "" Then
     ws2.Range("A1").Font.Name = "Garamond"
     ws2.Range("A3") = " FOR THE MONTH OF :"
     ws2.Range("A3").Font.Bold = True
-    ws2.Range("C3") = ask_month
+    ws2.Range("C3") = UCase(Format(ask_month, "Long Date"))
     ws2.Range("C3").Interior.ColorIndex = 6
     ws2.Range("D102").Interior.ColorIndex = 6
     ws2.Range("B108").Interior.ColorIndex = 6
@@ -331,8 +357,8 @@ If outsider2 <> "" Then
     ws2.Range("D107") = "=K100"
     ws2.Range("E107") = "=L100"
     ws2.Range("A102") = "CONSORT BUNKERS B&L MONTHLY REPORT FOR MTH OF :"
-    ws2.Range("A106") = "TOTAL LOADED QUANTITY BY CONSORT"
-    ws2.Range("A107") = "TOTAL DELIVERED QUANTITY BY CONSORT"
+    ws2.Range("A106") = "TOTAL LOADED QUANTITY BY " & outsider2
+    ws2.Range("A107") = "TOTAL DELIVERED QUANTITY BY " & outsider2
     ws2.Range("A108") = "B & L"
     ws2.Range("A110") = "THANK YOU FOR YOUR VALUED SUPPORT AND COORPERATION"
     
@@ -347,8 +373,8 @@ If outsider2 <> "" Then
     ws2.Range("D107") = "=K100"
     ws2.Range("E107") = "=L100"
     ws2.Range("E108") = "=E106-E107"
-    ws2.Range("B108") = "ENTER"
-    ws2.Range("C108") = "ENTER"
+    ws2.Range("B108") = Format(Date, "dd/mmm/yyyy")
+    ws2.Range("C108") = "2359 HRS"
     
     ws2.Range("A100").Font.Bold = True
     ws2.Range("D100").Font.Bold = True
@@ -448,6 +474,7 @@ month_track = month(ask_month & " 1")
 'month_track2 keeps track of the month integer value of the current copysheet row
 Dim month_track2 As Integer
 month_track2 = 0
+
 'Adding columns for more fuel grade options in first report sheet
 ws.Range("M:O").EntireColumn.Insert
 ws.Range("M6") = "F"
@@ -560,6 +587,8 @@ If outsider1 <> "" Then
     Loop
 End If
 
+
+
 'RESETING VARIABLES FOR NEXT LOOP
 'row keeps track of copysheet row
 row = 2
@@ -664,23 +693,23 @@ If outsider1 <> "" Then
         i = i + 1
     Loop
     'Implementing correct format
-    With ws.Range("D108").Borders(xlEdgeTop)
+    With Range("D108").Borders(xlEdgeTop)
         .LineStyle = xlContinuous
         .Weight = xlThin
     End With
-    With ws.Range("E108").Borders(xlEdgeTop)
+    With Range("E108").Borders(xlEdgeTop)
         .LineStyle = xlContinuous
         .Weight = xlThin
     End With
-    With ws.Range("F108").Borders(xlEdgeTop)
+    With Range("F108").Borders(xlEdgeTop)
         .LineStyle = xlContinuous
         .Weight = xlThin
     End With
-    With ws.Range("G108").Borders(xlEdgeTop)
+    With Range("G108").Borders(xlEdgeTop)
         .LineStyle = xlContinuous
         .Weight = xlThin
     End With
-    With ws.Range("H108").Borders(xlEdgeTop)
+    With Range("H108").Borders(xlEdgeTop)
         .LineStyle = xlContinuous
         .Weight = xlThin
     End With
@@ -703,6 +732,7 @@ If outsider1 <> "" Then
     ws.Range("F108") = "=F106-F107"
     ws.Range("G108") = "=G106-G107"
     ws.Range("H108") = "=H106-H107"
+    
 End If
 
 'RESETING VARIABLES FOR NEXT LOOP
@@ -811,6 +841,8 @@ If outsider2 <> "" Then
     Loop
 End If
 
+
+
 'RESETING VARIABLES FOR NEXT LOOP
 'row keeps track of copysheet row
 row = 2
@@ -915,43 +947,43 @@ If outsider2 <> "" Then
         i = i + 1
     Loop
     'Implementing correct format
-    With ws2.Range("D108").Borders(xlEdgeTop)
+    With Range("D108").Borders(xlEdgeTop)
     .LineStyle = xlContinuous
     .Weight = xlThin
     End With
-    With ws2.Range("D108").Borders(xlEdgeBottom)
+    With Range("D108").Borders(xlEdgeBottom)
     .LineStyle = xlDouble
     .Weight = xlThick
     End With
-    With ws2.Range("E108").Borders(xlEdgeTop)
+    With Range("E108").Borders(xlEdgeTop)
     .LineStyle = xlContinuous
     .Weight = xlThin
     End With
-    With ws2.Range("E108").Borders(xlEdgeBottom)
+    With Range("E108").Borders(xlEdgeBottom)
     .LineStyle = xlDouble
     .Weight = xlThick
     End With
-    With ws2.Range("F108").Borders(xlEdgeBottom)
+    With Range("F108").Borders(xlEdgeBottom)
     .LineStyle = xlDouble
     .Weight = xlThick
     End With
-    With ws2.Range("G108").Borders(xlEdgeBottom)
+    With Range("G108").Borders(xlEdgeBottom)
     .LineStyle = xlDouble
     .Weight = xlThick
     End With
-    With ws2.Range("H108").Borders(xlEdgeBottom)
+    With Range("H108").Borders(xlEdgeBottom)
     .LineStyle = xlDouble
     .Weight = xlThick
     End With
-    With ws2.Range("F108").Borders(xlEdgeTop)
+    With Range("F108").Borders(xlEdgeTop)
         .LineStyle = xlContinuous
         .Weight = xlThin
     End With
-    With ws2.Range("G108").Borders(xlEdgeTop)
+    With Range("G108").Borders(xlEdgeTop)
         .LineStyle = xlContinuous
         .Weight = xlThin
     End With
-    With ws2.Range("H108").Borders(xlEdgeTop)
+    With Range("H108").Borders(xlEdgeTop)
         .LineStyle = xlContinuous
         .Weight = xlThin
     End With
@@ -975,15 +1007,17 @@ If outsider2 <> "" Then
     ws2.Range("G108") = "=G106-G107"
     ws2.Range("H108") = "=H106-H107"
     
-    With ws2.Range("F108").Borders(xlEdgeTop)
+   
+    
+    With Range("F108").Borders(xlEdgeTop)
     .LineStyle = xlContinuous
     .Weight = xlThin
     End With
-    With ws2.Range("G108").Borders(xlEdgeTop)
+    With Range("G108").Borders(xlEdgeTop)
     .LineStyle = xlContinuous
     .Weight = xlThin
     End With
-    With ws2.Range("H108").Borders(xlEdgeTop)
+    With Range("H108").Borders(xlEdgeTop)
     .LineStyle = xlContinuous
     .Weight = xlThin
     End With
@@ -991,6 +1025,7 @@ End If
 
 'Hiding any blank Columns or Rows
 If outsider2 <> "" Then
+        
     If ws2.Range("H108") < 0 Then ws2.Range("H108").Font.Color = vbRed
     If ws2.Range("F108") < 0 Then ws2.Range("H108").Font.Color = vbRed
     If ws2.Range("G108") < 0 Then ws2.Range("H108").Font.Color = vbRed
@@ -1006,22 +1041,19 @@ If outsider2 <> "" Then
     If WorksheetFunction.CountA(ws2.Range("Q7:Q99")) = 0 Then ws2.Range("Q1").EntireColumn.Hidden = True
     If WorksheetFunction.CountA(ws2.Range("R7:R99")) = 0 Then ws2.Range("R1").EntireColumn.Hidden = True
     
-    'Adding commas and 3 decimals points
     ws2.Activate
+    'negative number formatting, Adding commas and 3 decimals points
     ws2.Range("D7:H200").Select
-    Selection.NumberFormat = "#,##0.000"
-    Selection.FormatConditions.Add Type:=xlTextString, String:=".", _
-        TextOperator:=xlContains
-    Selection.FormatConditions(Selection.FormatConditions.Count).SetFirstPriority
+    Selection.NumberFormat = "#,##0.000_);[Red](#,##0.000)"
+    Selection.FormatConditions.Add Type:=xlCellValue, Operator:=xlLess, _
+        Formula1:="=0"
     Selection.FormatConditions(1).StopIfTrue = True
-    'Adding commas and 3 decimals points
+    'negative number formatting, Adding commas and 3 decimals points
     ws2.Range("N7:R100").Select
-    Selection.NumberFormat = "#,##0.000"
-    Selection.FormatConditions.Add Type:=xlTextString, String:=".", _
-        TextOperator:=xlContains
-    Selection.FormatConditions(Selection.FormatConditions.Count).SetFirstPriority
+    Selection.NumberFormat = "#,##0.000_);[Red](#,##0.000)"
+    Selection.FormatConditions.Add Type:=xlCellValue, Operator:=xlLess, _
+        Formula1:="=0"
     Selection.FormatConditions(1).StopIfTrue = True
-    ws2.Range("A2").Select
 End If
 
 'Hiding any blank Columns or Rows
@@ -1048,6 +1080,7 @@ If outsider1 <> "" Then
         .Weight = xlThick
     End With
     
+    
     If ws.Range("H108") < 0 Then ws.Range("H108").Font.Color = vbRed
     If ws.Range("F108") < 0 Then ws.Range("H108").Font.Color = vbRed
     If ws.Range("G108") < 0 Then ws.Range("H108").Font.Color = vbRed
@@ -1062,22 +1095,19 @@ If outsider1 <> "" Then
     If WorksheetFunction.CountA(ws.Range("Q7:Q99")) = 0 Then ws.Range("Q1").EntireColumn.Hidden = True
     If WorksheetFunction.CountA(ws.Range("R7:R99")) = 0 Then ws.Range("R1").EntireColumn.Hidden = True
     
-    'Adding commas and 3 decimals points
     ws.Activate
+    'negative number formatting, Adding commas and 3 decimals points
     ws.Range("D7:H200").Select
-    Selection.NumberFormat = "#,##0.000"
-    Selection.FormatConditions.Add Type:=xlTextString, String:=".", _
-        TextOperator:=xlContains
-    Selection.FormatConditions(Selection.FormatConditions.Count).SetFirstPriority
+    Selection.NumberFormat = "#,##0.000_);[Red](#,##0.000)"
+    Selection.FormatConditions.Add Type:=xlCellValue, Operator:=xlLess, _
+        Formula1:="=0"
     Selection.FormatConditions(1).StopIfTrue = True
-    'Adding commas and 3 decimals points
+    'negative number formatting, Adding commas and 3 decimals points
     ws.Range("N7:R100").Select
-    Selection.NumberFormat = "#,##0.000"
-    Selection.FormatConditions.Add Type:=xlTextString, String:=".", _
-        TextOperator:=xlContains
-    Selection.FormatConditions(Selection.FormatConditions.Count).SetFirstPriority
+    Selection.NumberFormat = "#,##0.000_);[Red](#,##0.000)"
+    Selection.FormatConditions.Add Type:=xlCellValue, Operator:=xlLess, _
+        Formula1:="=0"
     Selection.FormatConditions(1).StopIfTrue = True
-    ws.Range("A2").Select
 End If
 
 'Copying Worksheet into a new Excel Workbook file
@@ -1085,10 +1115,12 @@ ws.Copy
 
 Erase row_list
 If outsider2 <> "" Then ws2.Copy
+
 Application.DisplayAlerts = False
 If outsider1 <> "" Then ws.Delete
 If outsider2 <> "" Then ws2.Delete
 Application.DisplayAlerts = True
+
 Application.ScreenUpdating = True
 End Sub
 
